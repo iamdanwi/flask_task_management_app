@@ -1,36 +1,111 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Task Manager API
 
-## Getting Started
+## 📌 Overview
 
-First, run the development server:
+The **Task Manager API** is a Flask-based RESTful API that allows users to **register, log in, and manage their tasks** efficiently. It uses **JWT authentication** to secure endpoints and integrates with **MongoDB** for data storage.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 🚀 Features
+
+- **User Authentication (JWT-based)**
+- **Task CRUD Operations** (Create, Read, Update, Delete)
+- **Middleware for Authentication** (Protects routes)
+- **MongoDB Integration** (Data persistence)
+- **Pagination for Tasks** (Optional feature)
+- **Task Categories** (Work, Personal, etc.)
+- **Task Deadlines** (Sort by due date)
+
+## 🏗 Folder Structure
+
+```
+/flask_task_manager
+│── app.py                 # Main entry point
+│── config.py              # Configuration file
+│── requirements.txt       # Dependencies
+│── /routes                # API route handlers
+│   │── user_routes.py
+│   │── task_routes.py
+│── /controllers           # Handles request logic
+│   │── user_controller.py
+│   │── task_controller.py
+│── /models                # Database models
+│   │── user_model.py
+│   │── task_model.py
+│── /middleware            # Authentication middleware
+│   │── auth.py
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🛠 Installation & Setup
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 1️⃣ Clone the repository
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+git clone https://github.com/yourusername/flask-task-manager.git
+cd flask-task-manager
+```
 
-## Learn More
+### 2️⃣ Create a virtual environment
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+python3 -m venv venv
+source venv/bin/activate  # On Mac/Linux
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 3️⃣ Install dependencies
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+pip install -r requirements.txt
+```
 
-## Deploy on Vercel
+### 4️⃣ Setup MongoDB
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Install and run MongoDB locally OR use MongoDB Atlas.
+- Update **config.py** with your MongoDB URI.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### 5️⃣ Run the app
+
+```bash
+python app.py
+```
+
+## 🔑 Authentication (JWT Token)
+
+- Users must **register** and **log in** to receive a JWT token.
+- The token must be included in the **Authorization header** for protected routes.
+
+## 📝 API Endpoints
+
+### **1️⃣ User Authentication**
+
+| Method | Endpoint    | Description         |
+| ------ | ----------- | ------------------- |
+| POST   | `/register` | Register a new user |
+| POST   | `/login`    | Log in and get JWT  |
+
+### **2️⃣ Task Management** (Protected)
+
+| Method | Endpoint      | Description       |
+| ------ | ------------- | ----------------- |
+| POST   | `/tasks`      | Create a new task |
+| GET    | `/tasks`      | Get all tasks     |
+| PUT    | `/tasks/<id>` | Update a task     |
+| DELETE | `/tasks/<id>` | Delete a task     |
+
+## 🔐 Using JWT in Requests
+
+Include the token in headers:
+
+```bash
+Authorization: Bearer YOUR_JWT_TOKEN
+```
+
+## 🚀 Deployment (Optional)
+
+### **Deploy to Render / Railway / AWS**
+
+1. **Push Code to GitHub**
+2. **Deploy to a Hosting Service**
+3. **Set Environment Variables** (MongoDB URI, Secret Key)
+
+---
+
+### 🎯 Now you are ready to build and test your Flask Task Manager API! 🚀
